@@ -23,3 +23,33 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('clickAnyElement', (element) => { 
+    cy.get(element).should('be.visible').click()
+})
+
+Cypress.Commands.add('insertAnyText', (inputField, input) => { 
+    cy.get(inputField).should('be.visible').type(input)
+})
+
+Cypress.Commands.add('verifyElementText', (element, text) => { 
+    cy.get(element).should('be.visible').and('contain.text', text)
+})
+
+Cypress.Commands.add('selectFromDropdown', (element, text) => { 
+    cy.get (element).should('be.visible').select(text)
+})
+
+Cypress.Commands.add('clickElementThatContains', (element, text) => { 
+    cy.get(element).contains(text).should('be.visible').and('exist').click()
+})
+
+
+Cypress.Commands.add('selectAnyDate', (dateSelector, monthSelector, yearSelector, daySelector, month, year, text) => {
+  cy.get(dateSelector).click()
+  cy.get(monthSelector).select(month)
+  cy.get(yearSelector).select(year)
+  cy.get(daySelector).contains(text).click()
+})
+
+
